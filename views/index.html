@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/socket.io.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<span><%= title%></span>
+<button id="btn">btn</button>
+<script>
+    var socket = io.connect();
+
+    const btn = document.getElementById('btn');
+
+    let i = 0;
+    btn.onclick = function () {
+        socket.emit('login',{date: i});
+        i++;
+        if (i > 10) {
+            socket.close('断开连接');
+        }
+        socket.on('login', function (res) {
+            console.log(res);
+        });
+    }
+
+
+
+
+
+
+</script>
+</body>
+</html>
